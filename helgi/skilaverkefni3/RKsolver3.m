@@ -1,9 +1,6 @@
 function [tvec, yvec] = RKsolver3(y0,n,T,b_1)
     arguments
-        y0
-        n
-        T
-        b_1 = 3
+        y0; n; T; b_1 = 3;
     end
     y = zeros(length(y0),n);
     y(:,1)=y0;
