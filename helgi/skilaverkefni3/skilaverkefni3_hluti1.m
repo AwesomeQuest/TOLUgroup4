@@ -106,47 +106,27 @@ axis([0 axis_max 0 axis_max]);
 
 %% Daemi 4
 
-% Faum viðmiðunargildi til thess ad bera saman (finna skekkju)
-tspan = [0 T];
-[t_ref, y_ref] = RKsolver(y0_1,100,T);
+y0 = [40;9]; T = 50;
+n_vector = [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200, 102400];
 
-% Buum til vigur med mismunandi gildum a n
-% n_vector = [100 200 400 800];
-n_vector = 100*2.^(0:12);
-
-% Tomt fylki til ad geyma mismuninn
-% error1 = zeros(size(n_vector));
-error1 = zeros(length(y0_1),length(n_vector));
-% index1 = find(abs(t_ref - 25) < 1e-10);
+[~, yvec_rk] = RKsolver(y0,n_vector(end)*2,T);
+error1 = zeros(2,length(n_vector));
 
 for i = 1:length(n_vector)
-    [t_vec, y_vec] = eulersolve(y0_1, n_vector(i), T);
-%     index = find(t_vec == 25);
-%     error_vec(:,i) = sum(abs(y_ref(:,end) - y_vec(:,end)));
-%     error1(i) = norm(y_ref(:,end) - y_vec(:,end));
-    error1(:,i) = abs(y_ref(:,end) - y_vec(:,end));
+    [~ ,yvec_euler] = eulersolve(y0,n_vector(i),T);
+    error1(:,i) = abs(yvec_euler(:,end) - yvec_rk(:,end));
 end
 
-% index = find(t_vec == 30)
-
-factor_munur = error1(:,1:end-1) ./ error1(:,2:end);
-log2_ratio = log2(factor_munur);
-
-% plot(t_vec,y_vec);
-% hold on
-% plot(t_ref,y_ref);
-% 
-% legend("y_1 Euler","y_2 Euler","y_1 RK4","y_2 RK4");
-
-% plot(n_vector,error_vec);
+fractional_error_euler = error1(:,1:end-1)./error1(:,2:end);
 
 %% Daemi 5
 
 T1 = 100;
 y0_loop = [y0_1 y0_2 [100; 25]];
+n = 1000; % Breyta thessu i 16000 f myndir 5b, 5d og 5f
 
 for i = 1:length(y0_loop)
-    [t_eul, y_eul] = eulersolve(y0_loop(:,i),16000,T1);
+    [t_eul, y_eul] = eulersolve(y0_loop(:,i),1000,T1);
     [t_RK, y_RK] = RKsolver(y0_loop(:,i),1000,T1);
     figure;
     plot(t_eul,y_eul(1,:),'--b',LineWidth=1.5)
@@ -171,18 +151,27 @@ end
 %% Daemi 6
 
 % Tomt fylki til ad geyma mismuninn
-% error_RK = zeros(size(n_vector));
+y0_1 = [40; 9];
+n_vector = [100, 200, 400, 800, 1600, 3200, 6400, 12800];
+T = 50;
 error_RK = zeros(length(y0_1),length(n_vector));
+[~, yvec_rk] = RKsolver(y0_1,1e6,T);
 
 for i = 1:length(n_vector)
     [t_vec, y_vec] = RKsolver(y0_1, n_vector(i), T);
-%     error_vec(:,i) = sum(abs(y_ref(:,end) - y_vec(:,end)));
-%     disp(y_vec(:,end));
-%     error_RK(i) = norm(y_ref(:,end) - y_vec(:,end));
-    error_RK(:,i) = abs(y_ref(:,end) - y_vec(:,end));
+    error_RK(:,i) = abs(yvec_rk(:,end) - y_vec(:,end));
 end
 
 factor_RK = error_RK(:,1:end-1) ./ error_RK(:,2:end);
 log2_ratio_RK = log2(factor_RK);
 
-% 4. stigs baeting thar til 100*2^7
+figure;
+loglog(n_vector,error_RK,LineWidth=1)
+title("loglog plot sýnir beina línu með hallatölu")
+p1 = polyfit(log(n_vector), log(error_RK(1,:)),1);
+p2 = polyfit(log(n_vector), log(error_RK(2,:)),1);
+slope1 = p1(1); slope2 = p2(1);
+
+txt1 = "Hallatala y_1 = " + slope1;
+txt2 = "Hallatala y_2 = " + slope2;
+legend(txt1,txt2);

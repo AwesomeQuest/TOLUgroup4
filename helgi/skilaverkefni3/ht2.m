@@ -1,8 +1,6 @@
 function z = ht2(t,y,b_1)
     arguments
-        t
-        y
-        b_1 = 3
+        t; y; b_1 = 3;
     end
 %     if nargin < 4 % Ef nr of args er minna en 4 er b_1 fastinn settur sem 3
 %         b_1 = 3; % gerir mer kleift ad profa f mismunandi b_1
