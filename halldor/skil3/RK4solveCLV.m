@@ -1,8 +1,4 @@
-RKsolver([0.1;0.2;0.2], 1000, 400.0)
-
-
-
-function [tvec, yvec] = RKsolver(y0,n,T)
+function [tvec, yvec] = RK4solveCLV(y0,n,T)
     y = zeros(length(y0),n);
     y(:,1)=y0;
     h=T/n;
