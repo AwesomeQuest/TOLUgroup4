@@ -1,41 +1,24 @@
-
+clc;close all;
 T = 30;
 
 N = 100;
 M = 100;
 
 
-[us,ts] = iterdiffv1(T,3,10)
+[us1,ts,xs1] = iterdiffv1(T,N,M);
+[us2,ts,xs2] = iterdiffv2(T,N,M);
+[us3,ts,xs3] = iterdiffv1(T,10*N,M);
 
-plot(us(:,1))
 
-function [us,ts] = iterdiffv1(T,N,M)
-    D = 0.01;
-    v = 0.1;
-    L = 5;
-    h = L/M;
-    k = T/N;
 
-    ts = 0:k:T;
-
-    alpha = k*D/h^2;
-    beta  = v*k/2/h;
-
-    A = sparse(M+1,M+1);
-    A(1,1) = 1;
-    A(end,end) = 1;
-    for i = 2:M
-        A(i,i-1) = -beta-alpha;
-        A(i,i) = 1+2*alpha;
-        A(i,i+1) = beta-alpha;
-    end
-
-    us = zeros(M+1,N+1);
-    for i = 2:M
-        us(i,1) = exp(-(h*(i-1) -1)^2/D);
-    end
-    for i = 2:N+1
-        us(:,i) = A\us(:,i-1);
-    end
-    return
+for i = 1:N+1
+    plot(xs1,us1(:,i))
+    hold on
+    plot(xs2,us2(:,i))
+    plot(xs3,us3(:,10*i))
+    legend("original", "modified", "many iterations original")
+    ylim([0,1])
+    pause(0.1)
+    hold off
 end
+close all;
