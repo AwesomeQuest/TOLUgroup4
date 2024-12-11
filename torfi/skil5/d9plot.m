@@ -7,14 +7,14 @@ T = 120;
 
 [M,I] = max(us1,[], 1);
 
-yyaxis left
+yyaxis right
 plot(ts,M)
-ylim([0,1.01])
+ylim([-0.02,1.01])
 hold on
 ylabel("C_{max}(t)")
-yyaxis right
+yyaxis left
 plot(ts,xs1(I))
-ylim([0,5.05])
+ylim([-0.1,5.05])
 legend("C(t)", "x(t)")
 xlabel("t")
 ylabel("x_{max}(t)")
