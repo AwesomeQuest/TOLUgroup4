@@ -130,3 +130,73 @@ close(v);
 
 [~, max_idx] = max(w(:, end));
 disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+
+%%
+% Common parameters
+clc; clear all;
+L = 5; T = 30; 
+D = 0.01; v = 0.1; 
+time_steps = [0, T/6, 2*T/6, 3*T/6, 4*T/6, 5*T/6]; % Time points for plotting
+
+% Parameters for Part 4
+m1 = 100; n1 = 100;
+h1 = L / m1; k1 = T / n1;
+alpha1 = (k1 * D) / (h1^2);
+beta1 = (v * k1) / (2 * h1);
+
+A1 = diag(1 + 2 * alpha1 * ones(m1-1, 1)) + ...
+    diag((-alpha1 - beta1) * ones(m1-2, 1), -1) + ...
+    diag((-alpha1 + beta1) * ones(m1-2, 1), 1);
+
+x1 = linspace(0, L, m1+1);
+w1 = zeros(m1+1, n1+1);
+w1(:, 1) = exp(-((x1-1).^2)/D);
+
+for j = 2:n1+1
+    b1 = w1(2:m1, j-1);
+    w1(2:m1, j) = A1 \ b1;
+    w1(1, j) = 0;
+    w1(m1+1, j) = 0;
+end
+
+% Parameters for Part 5
+m2 = 1000; n2 = 1000;
+h2 = L / m2; k2 = T / n2;
+alpha2 = (k2 * D) / (h2^2);
+beta2 = (v * k2) / (2 * h2);
+
+main_diag = (1 + 2 * alpha2) * ones(m2-1, 1);
+lower_diag = (-alpha2 - beta2) * ones(m2-1, 1);
+upper_diag = (-alpha2 + beta2) * ones(m2-1, 1);
+
+A2 = spdiags([lower_diag main_diag upper_diag], [-1 0 1], m2-1, m2-1);
+
+x2 = linspace(0, L, m2+1);
+w2 = zeros(m2+1, n2+1);
+w2(:, 1) = exp(-((x2-1).^2)/D);
+
+for j = 2:n2+1
+    b2 = w2(2:m2, j-1);
+    w2(2:m2, j) = A2 \ b2;
+    w2(1, j) = 0;
+    w2(m2+1, j) = 0;
+end
+
+% Plot results for comparison
+for t_idx = 1:length(time_steps)
+    t_plot = time_steps(t_idx);
+    idx1 = round(t_plot / k1) + 1; % Find index for Part 4
+    idx2 = round(t_plot / k2) + 1; % Find index for Part 5
+    
+    figure;
+    hold on;
+    plot(x1, w1(:, idx1), 'b-', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 4 (m=n=100)');
+    plot(x2, w2(:, idx2), 'r-', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 5 (m=n=1000)');
+    hold off;
+    
+    xlabel('Staðsetning (m)');
+    ylabel('Þéttleiki (kg/m^3)');
+    title(sprintf('Dreifing mengunarefninsin við t = %.0f/6T', t_idx-1));
+    legend('Location', 'best');
+    grid on;
+end
