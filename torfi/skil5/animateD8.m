@@ -1,7 +1,7 @@
 clc;close all;
-T = randi([1,500]);
+T = 100;
 
-N = 30;
+N = 100;
 M = N;
 
 
