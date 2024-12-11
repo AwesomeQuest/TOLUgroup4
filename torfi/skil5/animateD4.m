@@ -9,7 +9,7 @@ M = 100;
 [us2,ts,xs2] = iterdiffv2(T,N,M);
 [us3,ts,xs3] = iterdiffv1(T,10*N,M);
 
-
+% plot(xs1,us1(:,round(N/6*6)))
 
 for i = 1:N+1
     plot(xs1,us1(:,i))
