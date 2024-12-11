@@ -1,14 +1,8 @@
 % skilaverkefni 4
 % part 4
 clc;clear all;
-L = 5;
-T = 30;
-m = 100;
-n = 100;
-D = 0.01;
-v = 0.1;
-h = L / m;
-k = T / n;
+L = 5;T = 30;m = 100;n = 100;
+D = 0.01;v = 0.1;h = L / m;k = T / n;
 
 alpha = (k * D)/(h^2);
 beta = (v * k)/(2*h);
@@ -49,7 +43,7 @@ for j = 1:n_frames
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
     xlabel('Position (m)');
     ylabel('Concentration (kg/m^3)');
-    title(sprintf('Pollutant Distribution at t = %.2f min', (j-1) * k));
+    title(sprintf('Pollutant Distribution at t = %.2f s', (j-1) * k));
     grid on;
     
     % Store frame
@@ -68,18 +62,12 @@ writeVideo(v, F);
 close(v);
 
 [~, max_idx] = max(w(:, end));
-disp(['Maximum concentration at t = 30 min: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
 
 %% part 5
 clc;clear all;
-L = 5;
-T = 30;
-m = 1000;
-n = 1000;
-D = 0.01;
-v = 0.1;
-h = L / m;
-k = T / n;
+L = 5;T = 30;m = 1000;n = 1000;
+D = 0.01;v = 0.1;h = L / m;k = T / n;
 
 alpha = (k * D)/(h^2);
 beta = (v * k)/(2*h);
@@ -122,7 +110,7 @@ for j = 1:n_frames
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
     xlabel('Position (m)');
     ylabel('Concentration (kg/m^3)');
-    title(sprintf('Pollutant Distribution at t = %.2f min', (j-1) * k));
+    title(sprintf('Pollutant Distribution at t = %.2f s', (j-1) * k));
     grid on;
     
     % Store frame
@@ -141,6 +129,4 @@ writeVideo(v, F);
 close(v);
 
 [~, max_idx] = max(w(:, end));
-disp(['Maximum concentration at t = 30 min: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
-
-%% part 6
+disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
