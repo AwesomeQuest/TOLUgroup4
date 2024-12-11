@@ -41,8 +41,8 @@ function [us,ts,xs] = iterdiffd8(T,N,M)
             bv(1) = 0;
             counts(4) = j;
         end
-        us(end,j) = 0;
-        bv(1:M+1)  = 4*us(1:M+1,j) - us(1:M+1,j-1);
+        bv(2:M+1)  = 4*us(2:M+1,j) - us(2:M+1,j-1);
+        bv(end) = 0;
     end
     disp(counts * k)
 end

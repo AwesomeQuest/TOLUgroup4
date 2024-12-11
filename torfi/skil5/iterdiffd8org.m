@@ -16,7 +16,10 @@ function [us,ts,xs] = iterdiffd8(T,N,M)
 
     counts = [];
     for j = 2:N+1
+        temp = us(end,j-1);
+        us(end,j-1) = 0;
         us(:,j) = A\us(:,j-1);
+        us(end,j-1) = temp;
         if j <= 20/T*N
             us(1,j) = (j-1)*k/20;
             counts(1) = j;

@@ -1,5 +1,5 @@
 clc;close all;
-T = 60;
+T = 100;
 
 N = 100;
 M = 100;
@@ -13,6 +13,6 @@ M = 100;
 for i = 1:N+1
     plot(xs1,us1(:,i))
     text(2.5, mean(us1(:,i)),num2str(ts(i)))
-    % ylim([0,1])
+    ylim([0,1])
     pause(0.1)
 end
