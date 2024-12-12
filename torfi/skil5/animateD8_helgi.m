@@ -1,16 +1,29 @@
-clc;close all;
-T = 30;
-
+clc;clear;close all;
+T = 100;
 N = 100;
-M = 1000;
+M = N;
 k = T/N;
 
 
-[us1,ts,xs1] = iterdiffv1(T,N,M);
-% [us2,ts,xs2] = iterdiffv2(T,N,M);
-% [us3,ts,xs3] = iterdiffv1(T,10*N,M);
+[us1,ts1,xs1] = iterdiffd8(T,N,M);
+% [us1,ts,xs1] = iterdiffd8org(T,N,M);
+% plot(xs1,us1(:,1))
 
-% plot(xs1,us1(:,round(N/6*6)))
+for i = 1:6
+    figure;
+    j = -i + 7
+    plot(xs1,us1(:,round(N/6*j)+1),LineWidth=2)
+    ylim([0 1])
+    xlabel("Staðsetning [m]")
+    ylabel("Þéttleiki [kg/m^3]")
+    grid on
+    txt = "d8plot" + j + ".svg"
+    saveas(gcf,txt)
+end
+
+
+% plot3(xs1,ts1,us1);
+%% LETS ANIMATE THIS MF
 
 % Animation parameters
 FPS = 15;                 % Frames per second for playback
@@ -35,27 +48,13 @@ for i = 1:N+1
     F(i) = getframe(hfig);
 %     hold off
 end
-% close all;
-
-% for i = 0:5
-% %     figure;
-%     j = -i + 5
-%     plot(xs1,us1(:,round(N/6*j)+1),LineWidth=2)
-%     ylim([0 1])
-%     xlabel("Staðsetning [m]")
-%     ylabel("Þéttleiki [kg/m^3]")
-%     grid on
-%     txt = "d4plot" + j + ".svg"
-% %     saveas(gcf,txt)
-%     
-% end
 
 % Play animation
 close all;
 movie(gcf, F, 1, FPS);
 
 % Save animation as video
-v = VideoWriter('Pollutant_Animation_d4.mp4', 'MPEG-4');
+v = VideoWriter('Pollutant_Animation_d8.mp4', 'MPEG-4');
 v.FrameRate = FPS;
 open(v);
 writeVideo(v, F);
