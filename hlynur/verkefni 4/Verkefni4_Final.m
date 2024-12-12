@@ -75,17 +75,17 @@ end
 
 % Play animation
 close all;
-movie(gcf, F, 1, FPS);
+% movie(gcf, F, 1, FPS);
 
-% % Save animation as video
-% v = VideoWriter('Pollutant_Animation2.mp4', 'MPEG-4');
-% v.FrameRate = FPS;
-% open(v);
-% writeVideo(v, F);
-% close(v);
-% 
-% [~, max_idx] = max(w(:, end));
-% disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+% Save animation as video
+v = VideoWriter('Pollutant_Animation2.mp4', 'MPEG-4');
+v.FrameRate = FPS;
+open(v);
+writeVideo(v, F);
+close(v);
+
+[~, max_idx] = max(w(:, end));
+disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
 
 
 
