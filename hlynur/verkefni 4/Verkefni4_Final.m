@@ -213,10 +213,11 @@ ylabel("Skekkja [%]")
 
 %% Raungildi 2.stigs skekkja metin á 1 stigs
 % mynd 5.b
-% Tekur 80-90 skúndur að keyra
-n_real=100;T=30;
+% Tekur 10 skúndur að keyra
+n_real=10000;T=30;
 [mat_real,~,~] = iterdiffv2(T,n_real,n_real);
-
+real_high_val=max(mat_real(:,end));
+%% Tekur 90 sekúndur
 T=30;L=5;
 n_high=9000;
 skekkja=zeros(1,n_high/300);
@@ -234,19 +235,13 @@ for i=n
     skekkja(1,count)=skekkja1;
     count=count+1;
 end
-%% Hér er verið að kanna skekkjuna þear n=4000  og raungildi er reiknað m.v. n=100 en 2. stigs aðferð
-n=40000;
-[mat1,ts,x_1] = iterdiffv1(T,n,n); %fall sem notar upprunalega A fylki og b
-high_val1=max(mat1(:,end)); %finnur hæsta gildið
-skekkja1=abs(real_high_val-high_val1)/(real_high_val)*100 %reiknar skekkju 
-
 
 %% mynd 5.b
 % tekur 1 sek 
 
 plot(n,skekkja,'r',LineWidth=1)
 yline(0.1,'g', LineWidth=1)
-% xline(2600,'b',LineWidth=1)
+xline(7200,'b',LineWidth=1)
 set(gca,'fontsize',14)
 xlabel("n")
 ylabel("Skekkja [%]")
