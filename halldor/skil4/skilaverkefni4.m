@@ -24,7 +24,7 @@ for j = 2:n+1
 end
 
 % Animation parameters
-FPS = 30;                 % Frames per second for playback
+FPS = 15;                 % Frames per second for playback
 n_frames = n + 1;         % Total number of frames
 hfig = figure('visible', 'off'); % Hidden figure window for rendering
 F(1:n_frames) = getframe(hfig); % Preallocate frames
@@ -41,9 +41,9 @@ for j = 1:n_frames
     
     % Set axis limits and labels
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
-    xlabel('Position (m)');
-    ylabel('Concentration (kg/m^3)');
-    title(sprintf('Pollutant Distribution at t = %.2f s', (j-1) * k));
+    xlabel('Staðsetning [m]');
+    ylabel('Þéttleiki [kg/m^3]');
+    title(sprintf('Dreifing mengunarefnis við t = %.2f s', (j-1) * k));
     grid on;
     
     % Store frame
@@ -91,7 +91,7 @@ for j = 2:n+1
 end
 
 % Animation parameters
-FPS = 30;                 % Frames per second for playback
+FPS = 50;                 % Frames per second for playback
 n_frames = n + 1;         % Total number of frames
 hfig = figure('visible', 'off'); % Hidden figure window for rendering
 F(1:n_frames) = getframe(hfig); % Preallocate frames
@@ -108,9 +108,9 @@ for j = 1:n_frames
     
     % Set axis limits and labels
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
-    xlabel('Position (m)');
-    ylabel('Concentration (kg/m^3)');
-    title(sprintf('Pollutant Distribution at t = %.2f s', (j-1) * k));
+    xlabel('Staðsetning [m]');
+    ylabel('Þéttleiki [kg/m^3]');
+    title(sprintf('Dreifing á mengunarefni við t = %.2f s', (j-1) * k));
     grid on;
     
     % Store frame
@@ -186,17 +186,19 @@ end
 for t_idx = 1:length(time_steps)
     t_plot = time_steps(t_idx);
     idx1 = round(t_plot / k1) + 1; % Find index for Part 4
+    disp(idx1)
     idx2 = round(t_plot / k2) + 1; % Find index for Part 5
-    
+    disp(idx2)
     figure;
     hold on;
     plot(x1, w1(:, idx1), 'b-', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 4 (m=n=100)');
-    plot(x2, w2(:, idx2), 'r-', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 5 (m=n=1000)');
+    plot(x2, w2(:, idx2), 'r--', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 5 (m=n=1000)');
     hold off;
     
-    xlabel('Staðsetning (m)');
-    ylabel('Þéttleiki (kg/m^3)');
-    title(sprintf('Dreifing mengunarefninsin við t = %.0f/6T', t_idx-1));
+    xlabel('Staðsetning [m]');
+    ylabel('Þéttleiki [kg/m^3]');
+    % title(sprintf('Dreifing mengunarefninsin við t = %.0f/6T', t_idx-1));
     legend('Location', 'best');
+    ylim([0 1])
     grid on;
 end
