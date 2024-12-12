@@ -14,8 +14,6 @@ hold on;
 
 % Plot pollutant concentration
 plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
-% Plot pollutant concentration
-plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
 
 % Set axis limits and labels
 axis([0, 5, 0, 1]); % Adjust limits based on expected results
