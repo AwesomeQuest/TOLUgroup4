@@ -250,7 +250,7 @@ ylabel("Skekkja [%]")
 % mynd 5.c
 %Tekur 3 sekúndur að keyra
 clear,clc
-n_real=4000;T=30;
+n_real=10000;T=30;
 [mat_real,~,~] = iterdiffv2(T,n_real,n_real);
 T=30;L=5;
 n_high=500;
