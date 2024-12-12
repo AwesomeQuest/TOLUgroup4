@@ -1,8 +1,7 @@
 clc;close all;
-T = 100;
-
 N = 100;
-M = N;
+M = 100;
+T = 120;
 
 
 [us1,ts1,xs1] = iterdiffd8(T,N,M);
@@ -12,7 +11,7 @@ M = N;
 
 for i = 1:N+1
     plot(xs1,us1(:,i))
-    text(2.5,2.5,num2str(ts(i)))
+    text(2.5,2.5,num2str(ts1(i)))
     ylim([0,1])
     pause(0.1)
 end
