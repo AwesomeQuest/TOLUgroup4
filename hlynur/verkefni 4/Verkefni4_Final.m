@@ -66,7 +66,7 @@ for j = 1:n_frames
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
     xlabel('Staðsetning [m]');
     ylabel('Þéttleiki [kg/m^3]');
-%     title(sprintf('Dreifing mengunarefnisins við t = %.2f mín', (j-1) * k));
+    title(sprintf('Dreifing mengunarefnisins við t = %.2f mín', (j-1) * k));
     grid on;
     
     % Store frame
@@ -75,17 +75,17 @@ end
 
 % Play animation
 close all;
-% movie(gcf, F, 1, FPS);
+movie(gcf, F, 1, FPS);
 
-% Save animation as video
-v = VideoWriter('Pollutant_Animation2.mp4', 'MPEG-4');
-v.FrameRate = FPS;
-open(v);
-writeVideo(v, F);
-close(v);
-
-[~, max_idx] = max(w(:, end));
-disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+% % Save animation as video
+% v = VideoWriter('Pollutant_Animation2.mp4', 'MPEG-4');
+% v.FrameRate = FPS;
+% open(v);
+% writeVideo(v, F);
+% close(v);
+% 
+% [~, max_idx] = max(w(:, end));
+% disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
 
 
 
@@ -149,12 +149,12 @@ for i=n
     count=count+1;
 end
 
-% plot(n,skekkja)
-% legend("show")
-% plot(x_1,mat1(:,end))
-% hold on
-% plot(x_2,mat2(:,end))
-% hold off
+plot(n,skekkja)
+legend("show")
+plot(x_1,mat1(:,end))
+hold on
+plot(x_2,mat2(:,end))
+hold off
 %% mynd 4 dæmi 6
 % tekur 1 sek að keyra
 logn=log(n);log_skekkja=log(skekkja);
@@ -168,7 +168,7 @@ txt1="Hallatala = "+ p1(1) ;text(600,2,txt1,"FontSize",14)
 xlabel("log(n)","FontSize",14)
 ylabel("log(skekkja)","FontSize",14)
 % title("loglog plot af sekkkju og n")
-saveas(gcf,"d6_loglog1.svg")
+% saveas(gcf,"d6_loglog1.svg")
 
 figure;
 loglog(n,skekkja(2,:),"b",LineWidth=2)
@@ -176,7 +176,7 @@ txt1="Hallatala = "+ p2(1) ;text(600,0.02,txt1,'FontSize',14)
 xlabel("log(n)","FontSize",14)
 ylabel("log(skekkja)","FontSize",14)
 % title("loglog plot af sekkkju og n")
-saveas(gcf,"d6_loglog2.svg")
+% saveas(gcf,"d6_loglog2.svg")
 
 
 %% Dæmi 6
@@ -295,7 +295,7 @@ for i = 1:6
     ylabel("Þéttleiki [kg/m^3]")
     grid on
     txt = "d8plot" + j + ".svg";
-    saveas(gcf,txt)
+    % saveas(gcf,txt)
 end
 
 %% Dæmi 8 - Hreyfimynd
@@ -355,9 +355,6 @@ hold off
 
 %% Sjalfstæð
 
-% clc;close all;
-
-
 %% Plot Singles v1
 clc;close all;
 N = 200;
@@ -365,21 +362,20 @@ M = 200;
 T = 100;
 L = 5;
 [us1,ts1,xs1] = iterdiffsjalf(T,N,M);
+for i = 1:6
 
-clf;
-hold on;
+    figure;
+    % Plot pollutant concentration
+    plot(xs1,us1(:,round(N/6*i+1)), 'b-', 'LineWidth', 2)
+    
+    % Set axis limits and labels
+    axis([0, 5, 0, 1]); % Adjust limits based on expected results
+    xlabel('Staðsetning [m]');
+    ylabel('Þéttleiki [kg/m^3]');
+    
+    grid on;
 
-% Plot pollutant concentration
-plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
-
-% Set axis limits and labels
-axis([0, 5, 0, 1]); % Adjust limits based on expected results
-xlabel('Staðsetning [m]');
-ylabel('Þéttleiki [kg/m^3]');
-
-grid on;
-
-hold off;
+end
 
 
 %% Plot Singles v2
@@ -390,20 +386,20 @@ T = 100;
 L = 5;
 
 [us2,ts2,xs2] = iterdiffsjalf2(T,N,M);
-clf;
-hold on;
+for i = 1:6
 
-% Plot pollutant concentration
-plot(xs2,us2(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
+    figure;
+    % Plot pollutant concentration
+    plot(xs2,us2(:,round(N/6*i+1)), 'b-', 'LineWidth', 2)
+    
+    % Set axis limits and labels
+    axis([0, 5, 0, 1]); % Adjust limits based on expected results
+    xlabel('Staðsetning [m]');
+    ylabel('Þéttleiki [kg/m^3]');
+    
+    grid on;
 
-% Set axis limits and labels
-axis([0, 5, 0, 1]); % Adjust limits based on expected results
-xlabel('Staðsetning [m]');
-ylabel('Þéttleiki [kg/m^3]');
-
-grid on;
-
-hold off;
+end
 
 
 
@@ -439,17 +435,17 @@ for j = 1:n_frames
     F(j) = getframe(hfig);
 end
 
-% % Play animation
-% close all;
-% movie(gcf, F, 1, FPS);
+% Play animation
+close all;
+movie(gcf, F, 1, FPS)
 
 
-% Save animation as video
-v = VideoWriter('Pollutant_Animationsjalf1.mp4', 'MPEG-4');
-v.FrameRate = FPS;
-open(v);
-writeVideo(v, F);
-close(v);
+% % Save animation as video
+% v = VideoWriter('Pollutant_Animationsjalf1.mp4', 'MPEG-4');
+% v.FrameRate = FPS;
+% open(v);
+% writeVideo(v, F);
+% close(v);
 
 %% Make Movie v2
 clc;close all;
@@ -483,14 +479,14 @@ for j = 1:n_frames
     F(j) = getframe(hfig);
 end
 
-% % Play animation
-% close all;
-% movie(gcf, F, 1, FPS);
+% Play animation
+close all;
+movie(gcf, F, 1, FPS)
 
 
-% Save animation as video
-v = VideoWriter('Pollutant_Animationsjalf2.mp4', 'MPEG-4');
-v.FrameRate = FPS;
-open(v);
-writeVideo(v, F);
-close(v);
+% % Save animation as video
+% v = VideoWriter('Pollutant_Animationsjalf2.mp4', 'MPEG-4');
+% v.FrameRate = FPS;
+% open(v);
+% writeVideo(v, F);
+% close(v);
