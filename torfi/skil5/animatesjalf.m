@@ -6,7 +6,6 @@ N = 200;
 M = 200;
 T = 100;
 L = 5;
-[us1,ts1,xs1] = iterdiffsjalf(T,N,M);
 [us2,ts2,xs2] = iterdiffsjalf2(T,N,M);
 
 clf;
