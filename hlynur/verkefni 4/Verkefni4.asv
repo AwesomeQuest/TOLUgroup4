@@ -157,17 +157,17 @@ p2 = polyfit(logn,log_skekkja(2,:),1);
 % disp(p2(1))
 figure
 loglog(n,skekkja(1,:),'r',LineWidth=1)
-txt1="Hallatala = "+ p1(1) ;text(600,2,txt1) 
-xlabel("log(n)")
-ylabel("log(skekkja)")
-title("loglog plot af sekkkju og n")
+txt1="Hallatala = "+ p1(1) ;text(600,2,txt1,"FontSize",14) 
+xlabel("log(n)","FontSize",14)
+ylabel("log(skekkja)","FontSize",14)
+% title("loglog plot af sekkkju og n")
 
 figure
 loglog(n,skekkja(2,:),"b",LineWidth=1)
-txt1="Hallatala = "+ p2(1) ;text(600,0.02,txt1) 
-xlabel("log(n)")
-ylabel("log(skekkja)")
-title("loglog plot af sekkkju og n")
+txt1="Hallatala = "+ p2(1) ;text(600,0.02,txt1,'FontSize',14) 
+xlabel("log(n)","FontSize",14)
+ylabel("log(skekkja)","FontSize",14)
+% title("loglog plot af sekkkju og n")
 
 
 %% Dæmi 6
