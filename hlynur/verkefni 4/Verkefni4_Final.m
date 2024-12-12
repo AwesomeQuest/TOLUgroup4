@@ -351,3 +351,7 @@ legend("C(t)", "x(t)")
 xlabel("t")
 ylabel("x_{max}(t)")
 hold off
+
+
+%% Sjalfstæð
+
