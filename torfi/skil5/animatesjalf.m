@@ -4,29 +4,29 @@ M = 200;
 T = 100;
 
 [us1,ts1,xs1] = iterdiffsjalf(T,N,M);
+[us2,ts2,xs2] = iterdiffsjalf2(T,N,M);
 
 %% Plot Singles
 
-% clf;
-% hold on;
+clf;
+hold on;
 
-% % Plot pollutant concentration
-% plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
+% Plot pollutant concentration
+plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
 
-% % Set axis limits and labels
-% axis([0, 5, 0, 1]); % Adjust limits based on expected results
-% xlabel('Staðsetning [m]');
-% ylabel('Þéttleiki [kg/m^3]');
-% %     title(sprintf('Dreifing mengunarefnisins við t = %.2f mín', (j-1) * k));
-% grid on;
+% Set axis limits and labels
+axis([0, 5, 0, 1]); % Adjust limits based on expected results
+xlabel('Staðsetning [m]');
+ylabel('Þéttleiki [kg/m^3]');
+%     title(sprintf('Dreifing mengunarefnisins við t = %.2f mín', (j-1) * k));
+grid on;
 
-% hold off;
+hold off;
 
 
 
 %% Make Movie
 
-% plot(xs1,us1(:,round(N/6*6)))
 L = 5;
 [w,ts,xs] = iterdiffsjalf(T,N,M);
 max_conc = 1;
@@ -55,16 +55,16 @@ for j = 1:n_frames
 end
 
 % Play animation
-close all;
-movie(gcf, F, 1, FPS);
+% close all;
+% movie(gcf, F, 1, FPS);
 
 
-% % Save animation as video
-% v = VideoWriter('Pollutant_Animationsjalf2.mp4', 'MPEG-4');
-% v.FrameRate = FPS;
-% open(v);
-% writeVideo(v, F);
-% close(v);
+% Save animation as video
+v = VideoWriter('Pollutant_Animationsjalf1.mp4', 'MPEG-4');
+v.FrameRate = FPS;
+open(v);
+writeVideo(v, F);
+close(v);
 
-% [~, max_idx] = max(w(:, end));
-% disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+[~, max_idx] = max(w(:, end));
+disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
