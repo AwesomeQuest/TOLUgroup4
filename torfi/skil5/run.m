@@ -34,6 +34,7 @@ function [us,ts] = iterdiffv1(T,N,M)
     for i = 2:M
         us(i,1) = exp(-(h*(i-1) -1)^2/D);
     end
+    
     for i = 2:N+1
         us(:,i) = A\us(:,i-1);
     end
