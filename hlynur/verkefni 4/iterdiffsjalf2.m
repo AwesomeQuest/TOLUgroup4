@@ -1,4 +1,4 @@
-function [us,ts,xs] = iterdiffsjalf(T,N,M)
+function [us,ts,xs] = iterdiffsjalf2(T,N,M)
 D = 0.01; L = 5; h = L/M; k = T/N;
 ts = 0:k:T; xs = 0:h:L;
 
@@ -59,8 +59,8 @@ function C = f(j,T,N)
 end
 
 function y = v(x)
-    y = (x^2+6*x+3)*2*sin(x^2)^2/600;
+    y = (x^2+6*x+3)/600;
 end
 function y = vp(x)
-    y = (2/600)*(6 + 2*x)*(sin(x^2)^2) + (2/300)*x*(3 + 6*x + x^2)*sin(2*(x^2));
+    y = (1/600)*(6 + 2*x);
 end
