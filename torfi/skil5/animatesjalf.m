@@ -2,6 +2,7 @@
 
 
 %% Plot Singles v1
+clc;close all;
 N = 200;
 M = 200;
 T = 100;
@@ -25,6 +26,7 @@ hold off;
 
 
 %% Plot Singles v2
+clc;close all;
 N = 200;
 M = 200;
 T = 100;
@@ -49,6 +51,7 @@ hold off;
 
 
 %% Make Movie v1
+clc;close all;
 N = 200;
 M = 200;
 T = 100;
@@ -92,6 +95,7 @@ writeVideo(v, F);
 close(v);
 
 %% Make Movie v2
+clc;close all;
 N = 200;
 M = 200;
 T = 100;
