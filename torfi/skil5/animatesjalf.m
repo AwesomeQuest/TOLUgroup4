@@ -7,10 +7,13 @@ M = 200;
 T = 100;
 L = 5;
 [us1,ts1,xs1] = iterdiffsjalf(T,N,M);
+[us2,ts2,xs2] = iterdiffsjalf2(T,N,M);
 
 clf;
 hold on;
 
+% Plot pollutant concentration
+plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
 % Plot pollutant concentration
 plot(xs1,us1(:,round(N/6*6+1)), 'b-', 'LineWidth', 2)
 
