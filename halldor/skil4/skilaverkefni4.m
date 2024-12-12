@@ -43,7 +43,7 @@ for j = 1:n_frames
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
     xlabel('Staðsetning [m]');
     ylabel('Þéttleiki [kg/m^3]');
-    title(sprintf('Dreifing mengunarefnis við t = %.2f s', (j-1) * k));
+    title(sprintf('Dreifing mengunarefnis við t = %.2f min', (j-1) * k));
     grid on;
     
     % Store frame
@@ -62,7 +62,7 @@ writeVideo(v, F);
 close(v);
 
 [~, max_idx] = max(w(:, end));
-disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+disp(['Maximum concentration at t = 30 min: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
 
 %% part 5
 clc;clear all;
@@ -110,7 +110,7 @@ for j = 1:n_frames
     axis([0, L, 0, max_conc * 1.1]); % Adjust limits based on expected results
     xlabel('Staðsetning [m]');
     ylabel('Þéttleiki [kg/m^3]');
-    title(sprintf('Dreifing á mengunarefni við t = %.2f s', (j-1) * k));
+    title(sprintf('Dreifing á mengunarefni við t = %.2f min', (j-1) * k));
     grid on;
     
     % Store frame
@@ -129,7 +129,7 @@ writeVideo(v, F);
 close(v);
 
 [~, max_idx] = max(w(:, end));
-disp(['Maximum concentration at t = 30 s: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
+disp(['Maximum concentration at t = 30 min: ', num2str(max(w(:, end))), ' at x = ', num2str(x(max_idx))]);
 
 %%
 % Common parameters
@@ -186,13 +186,11 @@ end
 for t_idx = 1:length(time_steps)
     t_plot = time_steps(t_idx);
     idx1 = round(t_plot / k1) + 1; % Find index for Part 4
-    disp(idx1)
     idx2 = round(t_plot / k2) + 1; % Find index for Part 5
-    disp(idx2)
     figure;
     hold on;
     plot(x1, w1(:, idx1), 'b-', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 4 (m=n=100)');
-    plot(x2, w2(:, idx2), 'r--', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 5 (m=n=1000)');
+    plot(x2, w2(:, idx2), 'r:', 'LineWidth', 1.5, 'DisplayName', 'Dæmi 5 (m=n=1000)');
     hold off;
     
     xlabel('Staðsetning [m]');
